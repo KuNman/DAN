@@ -31,7 +31,8 @@ class DefaultController extends Controller
      * @Route("/wall", name="wall")
      */
     public function wallAction(Request $request, WallParser $wallParser) {
-        $wall = $wallParser->Parse($request);
-        return $wall;
+        $id = $_POST["search-bar"];
+        $view = $wallParser->Parse($id);
+        return $this->render('parser.html.twig');
     }
 }
