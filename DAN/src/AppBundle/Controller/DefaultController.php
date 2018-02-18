@@ -23,16 +23,25 @@ class DefaultController extends Controller
     /**
      * @Route("/home", name="home")
      */
-    public function homeAction(Request $request) {
+    public function homeAction() {
         return $this->render('home.html.twig');
     }
 
     /**
      * @Route("/wall", name="wall")
      */
-    public function wallAction(Request $request, WallParser $wallParser) {
-        $id = $_POST["search-bar"];
-        $view = $wallParser->Parse($id);
-        return $this->render('parser.html.twig');
+    public function wallAction(WallParser $wallParser) {
+
+        if(WallParser::ValidateId($_POST["search-bar"])) {
+            $view = $wallParser->Parse($_POST["search-bar"]);
+            return $this->render('parser.html.twig');
+        }
+
+        $this->addFlash(
+            'notice',
+            'Validation error!'
+        );
+        return $this->redirectToRoute('home');
     }
+
 }
