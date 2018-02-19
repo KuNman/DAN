@@ -31,17 +31,16 @@ class DefaultController extends Controller
      * @Route("/wall", name="wall")
      */
     public function wallAction(WallParser $wallParser) {
-
-        if(WallParser::ValidateId($_POST["search-bar"])) {
-            $view = $wallParser->Parse($_POST["search-bar"]);
-            return $this->render('parser.html.twig');
+        $id = $_POST["search-bar"];
+        if(WallParser::ValidateId($id)) {
+                return $this->render('parser.html.twig', array("graph" => $wallParser->Parse($id)));
         }
 
         $this->addFlash(
             'notice',
             'Validation error!'
         );
-        return $this->redirectToRoute('home');
+//        return $this->redirectToRoute('home');
     }
 
 }
