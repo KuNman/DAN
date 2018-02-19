@@ -8,15 +8,19 @@
                 <th>Author</th>
                 <th>Comments</th>
                 <th>Likes</th>
+                <th>Date</th>
             </tr>
             </thead>
             <tbody>
-            {% for key,id in graph %}
+{{ dump(data) }}
+            {% for key, id in data.pageid %}
                 <tr>
-                    <td>{{ key }}</td>
-                    <td>{{ id }}</td>
+                   <td>{{ key }}</td>
+                   <td>{{ id }}</td>
+                   <td>Adam</td>
+                   <td>0</td>
+                    {% endfor %}
                 </tr>
-            {% endfor %}
             </tbody>
         </table>
     {% endblock %}

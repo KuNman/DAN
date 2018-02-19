@@ -35,7 +35,7 @@ class DefaultController extends Controller
         if (isset($_POST["search-bar"])) {
             $pageid = $_POST["search-bar"];
             if(WallParser::ValidateId($pageid)) {
-                return $this->render('parser.html.twig', array("graph" => $wallParser->Parse($pageid)));
+                return $this->render('parser.html.twig', array("data" => $wallParser->Parse($pageid)));
             }
         }
 
