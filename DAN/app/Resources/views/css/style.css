@@ -47,3 +47,14 @@
     left: initial;
     font-size: 14px;
 }
+
+.table.table-striped.table-hover {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.table.table-striped.table-hover th,
+.table.table-striped.table-hover td {
+    max-width: 55px;
+}
+

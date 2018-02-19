@@ -6,7 +6,7 @@ namespace AppBundle\Service;
 
 class WallParser
 {
-    public function Parse($id) {
+    public function Parse($pageid) {
 
         $fb = new \Facebook\Facebook([
             'app_id' => '2100100350208898',
@@ -16,7 +16,7 @@ class WallParser
 
         try {
             $response = $fb->get(
-                '/'.$id.'/posts',
+                '/'.$pageid.'/feed?limit=100',
                 "2100100350208898|byz9XlAKxmhJQoHbI21zYtAs96g"
             );
         } catch(\Facebook\Exceptions\FacebookResponseException $e) {
@@ -27,7 +27,10 @@ class WallParser
             exit;
         }
 
-        return $graphEdge = $response->getGraphEdge();
+        $graphEdge = $response->getGraphEdge();
+        return self::ParseId($graphEdge);
+
+
     }
 
     public function ValidateId($id) {
@@ -36,6 +39,15 @@ class WallParser
             return true;
         }
         return false;
+    }
+
+    static function ParseId($graphEdge) {
+        foreach ($graphEdge as $graphNode) {
+            $array = $graphNode->asArray();
+            $parts[] = explode("_", $array["id"]);
+            $id[] = $parts[0][1];
+        }
+        return $id;
     }
 
 }

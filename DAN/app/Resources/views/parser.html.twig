@@ -1,1 +1,22 @@
-{{ graph }}
+{% extends "base.html.twig" %}
+    {% block body %}
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Id</th>
+                <th>Author</th>
+                <th>Comments</th>
+                <th>Likes</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key,id in graph %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ id }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
